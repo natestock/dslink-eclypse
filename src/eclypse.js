@@ -11,7 +11,6 @@ class Eclypse extends RootNode {
             if (data['$is'] === 'device') {
                 let node = this.createChild(name, Device);
                 node.load(data);
-                node.setCookie();
             }
         }
     }
@@ -41,7 +40,6 @@ class AddDevice extends ActionNode {
             device.setConfig('name', body.hostName);
             device.setConfig('ip', IP)
             device.setConfig('set-cookie', headers['set-cookie'][0]);
-            device.setCookie();
             Object.keys(body).forEach(key => {
                 let prop = device.createChild(key, Property);
                 prop.setValue(body[key]);
