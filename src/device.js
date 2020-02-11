@@ -1,7 +1,7 @@
 const {BaseLocalNode} = require("dslink");
 
 class Device extends BaseLocalNode {
-    constructor(path, provider) {
+    constructor(path, provider, data) {
       super(path, provider);
     }
 }

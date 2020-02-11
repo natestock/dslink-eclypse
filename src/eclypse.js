@@ -1,5 +1,4 @@
 const {RootNode, ActionNode, DsError} = require("dslink");
-const request = require('request');
 const rpn = require('request-promise-native');
 const {Device} = require("./device");
 
@@ -23,20 +22,23 @@ class AddDevice extends ActionNode {
           Authorization: 'Basic YWRtaW46TWF4YWlyODE0'
         },
         json: true,
+        resolveWithFullResponse = true,
         timeout: 5000
       };
       return await rpn(options)
         .then(response => {
-          return this.addDevice(parentNode, response);
+            console.log(response);
+          //return this.addDevice(parentNode, data);
         })
         .catch(err => {
             console.log(err)
           return new DsError('invalidInput', {msg: 'Invalid IP address'});
         });
     }
-    addDevice(parentNode, props) {
-      let device = parentNode.createChild(props.hostId, Device);
-      device.setConfig('name', props.HostName);
+    addDevice(parentNode, data) {
+      let device = parentNode.createChild(data.hostId, Device);
+      device.setConfig('name', data.HostName);
+      device.setConfig('auth', data)
     }
 }
 
