@@ -30,3 +30,6 @@ node_modules
 .dslink.commit
 .dslink.key
 /.idea
+
+# DSA SDK
+/package
