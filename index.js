@@ -1,4 +1,4 @@
-const {DSLink, RootNode, ActionNode, BaseLocalNode} = require("dslink");
+const {DSLink, RootNode, ActionNode, BaseLocalNode, ValueNode} = require("dslink");
 const request = require('request');
 //const bodyParser = require('body-parser');
 //const rpn = require('request-promise-native');
@@ -29,6 +29,11 @@ class AddDevice extends ActionNode {
       response.on('end', () => {
         let jsonBody = JSON.parse(body);
         let device = parentNode.createChild(jsonBody.hostId, Device);
+        device.setConfig('name', jsonBody.hostName);
+        for (key in jsonBody) {
+          let prop = device.createChild(key, ValueNode);
+          prop.setValue(jsonBody[key]);
+        }
       });
     });
   }  
