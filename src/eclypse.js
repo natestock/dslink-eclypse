@@ -30,6 +30,7 @@ class AddDevice extends ActionNode {
           return this.addDevice(parentNode, response);
         })
         .catch(err => {
+            console.log(err)
           return new DsError('invalidInput', {msg: 'Invalid IP address'});
         });
     }
