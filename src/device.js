@@ -2,7 +2,10 @@ const {BaseLocalNode, ActionNode, ValueNode} = require("dslink");
 const rpn = require('request-promise-native');
 
 class Device extends BaseLocalNode {
-    cookieJar = rpn.jar();
+    constructor(path, provider) {
+        super(path, provider);
+        this._cookieJar = rpn.jar();
+    }
     initialize() {
         this.createChild('Refresh', Refresh);
         this.createChild('Remove', Remove);
@@ -19,7 +22,7 @@ class Device extends BaseLocalNode {
         return true;
     }
     setCookie() {
-        cookieJar.setCookie(this.getConfig('cookie'), getUri('/'))
+        this._cookieJar.setCookie(this.getConfig('cookie'), getUri('/'))
     }
     getUri(route) {
         return `http://${this.getConfig('ip')}` + String(route);
@@ -31,7 +34,7 @@ class Refresh extends ActionNode {
     async onInvoke(params, parentNode) {
         let options = {
         uri: parentNode.getUri('/api/rest/v1/info/device'),
-        jar: parentNode.cookieJar,
+        jar: parentNode._cookieJar,
         json: true,
         resolveWithFullResponse: true,
         timeout: 5000
