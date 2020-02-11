@@ -39,7 +39,7 @@ class AddDevice extends ActionNode {
             let device = parentNode.createChild(body.hostId, Device);
             device.setConfig('name', body.hostName);
             device.setConfig('ip', IP)
-            device.setConfig('set-cookie', headers['set-cookie']);
+            device.setConfig('set-cookie', headers['set-cookie'][0]);
             Object.keys(body).forEach(key => {
                 let prop = device.createChild(key, Property);
                 prop.setValue(body[key]);

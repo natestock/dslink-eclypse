@@ -13,6 +13,14 @@ class Device extends BaseLocalNode {
             }
         }
     }
+    load(data) {
+        super.load(data);
+        for (let key in data) {
+            if (key.charCodeAt(0) === 36 && key != '$is') {
+                this.setConfig(key, data[key]);
+            }
+        }
+    }
 }
 Device.profileName = 'device';
 
