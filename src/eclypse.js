@@ -1,4 +1,4 @@
-const {RootNode, ActionNode, DsError} = require("dslink");
+const {RootNode, ActionNode, ValueNode, DsError} = require("dslink");
 const rpn = require('request-promise-native');
 const {Device} = require("./device");
 
@@ -27,9 +27,14 @@ class AddDevice extends ActionNode {
       };
       return await rpn(options)
         .then(response => {
-            let device = parentNode.createChild(response.body.hostId, Device);
-            device.setConfig('name', response.body.hostName);
-            console.log(response.headers);
+            let {headers, body} = response;
+            let device = parentNode.createChild(body.hostId, Device);
+            device.setConfig('name', body.hostName);
+            device.setConfig('set-cookie', headers['set-cookie']);
+            Object.keys(body).forEach(key => {
+                let prop = device.createChild(key, ValueNode);
+                prop.setValue(body[key]);
+            });
             return device;
         })
         .catch(err => {
