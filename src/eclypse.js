@@ -1,7 +1,7 @@
 const {RootNode, ActionNode, DsError} = require("dslink");
 const request = require('request');
 const rpn = require('request-promise-native');
-const {Device} = require("./src/device");
+const {Device} = require("./device");
 
 class Eclypse extends RootNode {
     initialize() {
