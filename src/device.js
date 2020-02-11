@@ -2,6 +2,7 @@ const {BaseLocalNode, ActionNode} = require("dslink");
 
 class Device extends BaseLocalNode {
     initialize() {
+        this.createChild('Refresh', Refresh);
         this.createChild('Remove', Remove);
     }
 }
