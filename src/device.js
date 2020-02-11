@@ -1,4 +1,5 @@
 const {BaseLocalNode, ActionNode, ValueNode} = require("dslink");
+const rpn = require('request-promise-native');
 
 class Device extends BaseLocalNode {
     initialize() {
