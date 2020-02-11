@@ -34,8 +34,13 @@ class AddDevice extends ActionNode {
     .on('response', (response) => {
       console.log(response.statusCode);
       console.log(response.headers);
+      let body = '';
       response.on('data', (chunk) => {
-        console.log(chunk);
+        body += chunk;
+      });
+      response.on('end', () => {
+        let jsonBody = JSON.parse(body);
+        console.log(jsonBody);
       });
     });
   }
