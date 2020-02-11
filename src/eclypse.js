@@ -28,8 +28,8 @@ class AddDevice extends ActionNode {
       return await rpn(options)
         .then(response => {
             let device = parentNode.createChild(response.body.hostId, Device);
-            device.setConfig('name', response.body.HostName);
-            console.log(response.header);
+            device.setConfig('name', response.body.hostName);
+            console.log(response.headers);
             return device;
         })
         .catch(err => {
