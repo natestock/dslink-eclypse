@@ -26,7 +26,7 @@ class AddDevice extends ActionNode {
     };
     rpn(options)
       .then(response => {
-        console.log(response.statusCode);
+        console.log(response);
       })
       .catch(err => {
         console.log(err);
