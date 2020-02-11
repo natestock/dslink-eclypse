@@ -17,14 +17,16 @@ class AddDevice extends ActionNode {
   onInvoke(params, parentNode) {
     let {IP} = params;
     let device = this.getDevice(IP);
+    /*
     if (device) {
       let device = this.createChild(device.hostId, Device);
     } else {
       throw Error('Invalid device');
     }
+    */
   }
   getDevice(ip) {
-    request.get(ip).auth('admin', 'Maxair814', true)
+    request.get(`https://${ip}/api/rest/v1/info/device`).auth('admin', 'Maxair814', true)
     .on('response', (response) => {
       console.log(response);
     });
