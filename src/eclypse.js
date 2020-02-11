@@ -27,18 +27,19 @@ class AddDevice extends ActionNode {
       };
       return await rpn(options)
         .then(response => {
-            console.log(response);
-          //return this.addDevice(parentNode, data);
+            let device = parentNode.createChild(response.body.hostId, Device);
+            device.setConfig('name', response.body.HostName);
+            console.log(response.header);
+            return device;
         })
         .catch(err => {
-            console.log(err)
-          return new DsError('invalidInput', {msg: 'Invalid IP address'});
+            console.log(err);
+            return new DsError('invalidInput', {msg: 'Invalid IP address'});
         });
     }
     addDevice(parentNode, data) {
       let device = parentNode.createChild(data.hostId, Device);
-      device.setConfig('name', data.HostName);
-      device.setConfig('auth', data)
+      
     }
 }
 
