@@ -33,7 +33,8 @@ class Device extends BaseLocalNode {
 }
 */
 async function main() {
-  let link = new DSLink('ECLYPSE', {Eclypse});
+  let rootNode = new Eclypse();
+  let link = new DSLink('ECLYPSE', { rootNode });
   await link.connect();
 }
 
