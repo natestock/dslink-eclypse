@@ -27,7 +27,7 @@ class AddDevice extends ActionNode {
     }
     */
   }
-  getDevice(ip) {
+  async getDevice(ip) {
     request.get(`http://${ip}/api/rest/v1/info/device`).auth('admin', 'Maxair814', true)
     .on('error', (err) => {
       throw Error('404');
@@ -42,7 +42,7 @@ class AddDevice extends ActionNode {
       response.on('end', () => {
         let jsonBody = JSON.parse(body);
         //console.log(jsonBody);
-        return jsonBody;
+        await jsonBody;
       });
     });
   }
