@@ -29,7 +29,8 @@ class AddDevice extends ActionNode {
         console.log(response);
       })
       .catch(err => {
-        console.log(err);
+        //console.log(err);
+        return new DsError('invalidInput', {msg: 'Error'});
       });
   }  
 }
