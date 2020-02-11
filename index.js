@@ -17,35 +17,21 @@ class AddDevice extends ActionNode {
   }
   onInvoke(params, parentNode) {
     let {IP} = params;
-    let device = this.getDevice(IP);
-    console.log(device);
-    /*
-    if (device) {
-      let device = this.createChild(device.hostId, Device);
-    } else {
-      throw Error('Invalid device');
-    }
-    */
-  }
-  async getDevice(ip) {
-    request.get(`http://${ip}/api/rest/v1/info/device`).auth('admin', 'Maxair814', true)
+    request.get(`http://${IP}/api/rest/v1/info/device`).auth('admin', 'Maxair814', true)
     .on('error', (err) => {
       throw Error('404');
     })
     .on('response', (response) => {
-      //console.log(response.statusCode);
-      //console.log(response.headers);
       let body = '';
       response.on('data', (chunk) => {
         body += chunk;
       });
       response.on('end', () => {
         let jsonBody = JSON.parse(body);
-        //console.log(jsonBody);
-        await jsonBody;
+        let device = parentNode.createChild(jsonBody.hostId, Device);
       });
     });
-  }
+  }  
 }
 
 class Device extends BaseLocalNode {
