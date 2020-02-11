@@ -1,4 +1,4 @@
-const {DSLink, RootNode, ActionNode} = require("dslink");
+const {DSLink, RootNode, ActionNode, BaseLocalNode} = require("dslink");
 const request = require('request');
 //const rpn = require('request-promise-native');
 
