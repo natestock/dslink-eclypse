@@ -17,25 +17,20 @@ class AddDevice extends ActionNode {
   }
   onInvoke(params, parentNode) {
     let {IP} = params;
-    request.get(`http://${IP}/api/rest/v1/info/device`).auth('admin', 'Maxair814', true)
-    .on('error', (err) => {
-      throw Error('404');
-    })
-    .on('response', (response) => {
-      let body = '';
-      response.on('data', (chunk) => {
-        body += chunk;
+    let options = {
+      uri: `http://${IP}/api/rest/v1/info/device`,
+      headers: {
+        Authorization: 'Basic YWRtaW46TWF4YWlyODE0'
+      },
+      json: true
+    };
+    Response(options)
+      .then(response => {
+        console.log(response.statusCode);
+      })
+      .catch(err => {
+        console.log(err);
       });
-      response.on('end', () => {
-        let jsonBody = JSON.parse(body);
-        let device = parentNode.createChild(jsonBody.hostId, Device);
-        device.setConfig('name', jsonBody.hostName);
-        Object.keys(jsonBody).forEach(key => {
-          let prop = device.createChild(key, ValueNode);
-          prop.setValue(jsonBody[key]);
-        });
-      });
-    });
   }  
 }
 
