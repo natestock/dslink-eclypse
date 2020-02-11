@@ -27,8 +27,7 @@ class AddDevice extends ActionNode {
       };
       return await rpn(options)
         .then(response => {
-          this.addDevice(parentNode, response);
-          return response;
+          return this.addDevice(parentNode, response);
         })
         .catch(err => {
           return new DsError('invalidInput', {msg: 'Invalid IP address'});
@@ -38,6 +37,7 @@ class AddDevice extends ActionNode {
       let device = parentNode.createChild(props.hostId, Device);
       device.setConfig('$name', props.HostName);
       Object.keys(props).forEach()
+      return device;
     }
 }
 
