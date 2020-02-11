@@ -22,7 +22,7 @@ class AddDevice extends ActionNode {
           Authorization: 'Basic YWRtaW46TWF4YWlyODE0'
         },
         json: true,
-        resolveWithFullResponse = true,
+        resolveWithFullResponse: true,
         timeout: 5000
       };
       return await rpn(options)
