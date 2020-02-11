@@ -18,6 +18,7 @@ class AddDevice extends ActionNode {
   onInvoke(params, parentNode) {
     let {IP} = params;
     let device = this.getDevice(IP);
+    console.log(device);
     /*
     if (device) {
       let device = this.createChild(device.hostId, Device);
@@ -32,15 +33,16 @@ class AddDevice extends ActionNode {
       throw Error('404');
     })
     .on('response', (response) => {
-      console.log(response.statusCode);
-      console.log(response.headers);
+      //console.log(response.statusCode);
+      //console.log(response.headers);
       let body = '';
       response.on('data', (chunk) => {
         body += chunk;
       });
       response.on('end', () => {
         let jsonBody = JSON.parse(body);
-        console.log(jsonBody);
+        //console.log(jsonBody);
+        return jsonBody;
       });
     });
   }
