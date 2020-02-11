@@ -36,9 +36,7 @@ class AddDevice extends ActionNode {
     }
     addDevice(parentNode, props) {
       let device = parentNode.createChild(props.hostId, Device);
-      device.setConfig('$name', props.HostName);
-      Object.keys(props).forEach()
-      return device;
+      device.setConfig('name', props.HostName);
     }
 }
 
