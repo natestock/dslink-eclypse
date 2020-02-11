@@ -1,6 +1,5 @@
 const {DSLink, RootNode, ActionNode, BaseLocalNode, ValueNode, DsError} = require("dslink");
 const request = require('request');
-//const bodyParser = require('body-parser');
 const rpn = require('request-promise-native');
 
 class Eclypse extends RootNode {
@@ -22,7 +21,8 @@ class AddDevice extends ActionNode {
       headers: {
         Authorization: 'Basic YWRtaW46TWF4YWlyODE0'
       },
-      json: true
+      json: true,
+      timeout: 5000
     };
     await rpn(options)
       .then(response => {
@@ -30,7 +30,6 @@ class AddDevice extends ActionNode {
       })
       .catch(err => {
         console.log(err);
-        return new DsError('invalidInput', {msg: 'invalid IP address'});
       });
   }  
 }
