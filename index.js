@@ -24,7 +24,7 @@ class AddDevice extends ActionNode {
     }
   }
   getDevice(ip) {
-    request.get('endpoint').auth('admin', 'Maxair814', true)
+    request.get(ip).auth('admin', 'Maxair814', true)
     .on('response', (response) => {
       console.log(response);
     });
