@@ -2,13 +2,6 @@ const {DSLink, RootNode, ActionNode} = require("dslink");
 //const request = require('request');
 //const rpn = require('request-promise-native');
 
-class Eclypse extends RootNode {
-  initialize() {
-    this.createChild('Add Device', AddDevice);
-    console.log('root node initialized');
-  }
-}
-
 class AddDevice extends ActionNode {
   initialize() {
     this.setConfig('$params', [
@@ -34,8 +27,9 @@ class Device extends BaseLocalNode {
 }
 */
 async function main() {
-  let eclypseRoot = new Eclypse();
-  let link = new DSLink('ECLYPSE', {eclypseRoot});
+  let rootNode = new RootNode();
+  rootNode.createChild('Add Device', AddDevice);
+  let link = new DSLink('ECLYPSE', {rootNode});
   await link.connect();
 }
 
