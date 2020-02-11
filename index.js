@@ -3,8 +3,10 @@ const request = require('request');
 const rpn = require('request-promise-native');
 
 class Eclypse extends RootNode {
-  initialize() {
+  constructor(path, provider) {
+    super(path, provider);
     this.createChild('Add Device', AddDevice);
+    console.log('root created');
   }
 }
 
