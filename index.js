@@ -1,7 +1,7 @@
 const {DSLink, RootNode, ActionNode, BaseLocalNode, ValueNode} = require("dslink");
 const request = require('request');
 //const bodyParser = require('body-parser');
-//const rpn = require('request-promise-native');
+const rpn = require('request-promise-native');
 
 class Eclypse extends RootNode {
   initialize() {
@@ -24,7 +24,7 @@ class AddDevice extends ActionNode {
       },
       json: true
     };
-    Response(options)
+    rpn(options)
       .then(response => {
         console.log(response.statusCode);
       })
