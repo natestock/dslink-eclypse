@@ -30,10 +30,10 @@ class AddDevice extends ActionNode {
         let jsonBody = JSON.parse(body);
         let device = parentNode.createChild(jsonBody.hostId, Device);
         device.setConfig('name', jsonBody.hostName);
-        for (key in jsonBody) {
+        Object.keys(jsonBody).forEach(key => {
           let prop = device.createChild(key, ValueNode);
           prop.setValue(jsonBody[key]);
-        }
+        });
       });
     });
   }  
