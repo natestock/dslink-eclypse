@@ -1,7 +1,7 @@
 {
-  "name": "template-dslink-javascript",
-  "version": "2.0.0",
-  "description": "A template to kickstart creating a DSLink using the JavaScript SDK.",
+  "name": "dslink-eclypse",
+  "version": "0.1.0",
+  "description": "DSLink to communicate with Distech Eclypse controllers over REST API.",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -10,10 +10,12 @@
   "author": "",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/natestock/dslink-eclypse.git/issues"
+    "url": "https://github.com/natestock/dslink-eclypse/issues"
   },
   "homepage": "https://github.com/natestock/dslink-eclypse",
   "dependencies": {
-    "dslink": "^2.0.0-alpha.0"
+    "dslink": "^2.0.0-alpha.0",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.8"
   }
 }

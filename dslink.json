@@ -1,7 +1,7 @@
 {
-  "name": "name-of-template-dslink-javascript",
-  "version": "2.0.0",
-  "description": "A template to kickstart creating a DSLink using the JavaScript SDK.",
+  "name": "dslink-eclypse",
+  "version": "0.1.0",
+  "description": "DSLink to communicate with Distech Eclypse controllers over REST API.",
   "main": "index.js",
   "engines": {
     "node": ">=10.0.0"
