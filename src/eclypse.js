@@ -1,10 +1,18 @@
 const {RootNode, ActionNode, ValueNode, DsError} = require("dslink");
 const rpn = require('request-promise-native');
-const {Device} = require("./device");
+const {Device, Property} = require("./device");
 
 class Eclypse extends RootNode {
     initialize() {
       this.createChild('Add Device', AddDevice);
+    }
+    loadChild(name, data) {
+        if (!this.children.has(name)) {
+            if (data['$is'] === 'device') {
+                let node = this.createChild(name, Device);
+                node.load(data);
+            }
+        }
     }
   }
   
@@ -33,7 +41,7 @@ class AddDevice extends ActionNode {
             device.setConfig('ip', IP)
             device.setConfig('set-cookie', headers['set-cookie']);
             Object.keys(body).forEach(key => {
-                let prop = device.createChild(key, ValueNode);
+                let prop = device.createChild(key, Property);
                 prop.setValue(body[key]);
             });
             return device;

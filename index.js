@@ -3,7 +3,7 @@ const {Eclypse} = require("./src/eclypse");
 
 async function main() {
   let rootNode = new Eclypse();
-  let link = new DSLink('ECLYPSE', { rootNode });
+  let link = new DSLink('ECLYPSE', {rootNode, saveNodes: true});
   await link.connect();
 }
 

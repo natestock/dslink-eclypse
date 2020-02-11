@@ -1,11 +1,20 @@
-const {BaseLocalNode, ActionNode} = require("dslink");
+const {BaseLocalNode, ActionNode, ValueNode} = require("dslink");
 
 class Device extends BaseLocalNode {
     initialize() {
         this.createChild('Refresh', Refresh);
         this.createChild('Remove', Remove);
     }
+    loadChild(name, data) {
+        if (!this.children.has(name)) {
+            if (data['$is'] === 'property') {
+                let node = this.createChild(name, Property);
+                node.load(data);
+            }
+        }
+    }
 }
+Device.profileName = 'device';
 
 class Refresh extends ActionNode {
     async onInvoke(params, parentNode) {
@@ -37,4 +46,12 @@ class Remove extends ActionNode {
     }
 }
 
+class Property extends ValueNode {
+    constructor(path, provider) {
+        super(path, provider, undefined, undefined, true);
+    }
+}
+Property.profileName = 'property';
+
 exports.Device = Device;
+exports.Property = Property;
