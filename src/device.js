@@ -22,7 +22,7 @@ class Device extends BaseLocalNode {
         return true;
     }
     setCookie() {
-        this._cookieJar.setCookie(this.getConfig('cookie'), getUri('/'))
+        this._cookieJar.setCookie(this.getConfig('cookie'), this.getUri('/'))
     }
     getUri(route) {
         return `http://${this.getConfig('ip')}` + String(route);
