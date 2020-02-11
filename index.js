@@ -24,12 +24,12 @@ class AddDevice extends ActionNode {
       json: true,
       timeout: 5000
     };
-    await rpn(options)
+    return await rpn(options)
       .then(response => {
         console.log(response);
+        return response;
       })
       .catch(err => {
-        //console.log(err);
         return new DsError('invalidInput', {msg: 'Error'});
       });
   }  
