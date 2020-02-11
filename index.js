@@ -1,5 +1,6 @@
 const {DSLink, RootNode, ActionNode, BaseLocalNode} = require("dslink");
 const request = require('request');
+//const bodyParser = require('body-parser');
 //const rpn = require('request-promise-native');
 
 class Eclypse extends RootNode {
@@ -29,6 +30,7 @@ class AddDevice extends ActionNode {
     request.get(`http://${ip}/api/rest/v1/info/device`).auth('admin', 'Maxair814', true)
     .on('response', (response) => {
       console.log(response.statusCode);
+      console.log(response.body);
     });
   }
 }
