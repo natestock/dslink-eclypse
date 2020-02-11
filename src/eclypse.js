@@ -37,10 +37,6 @@ class AddDevice extends ActionNode {
             return new DsError('invalidInput', {msg: 'Invalid IP address'});
         });
     }
-    addDevice(parentNode, data) {
-      let device = parentNode.createChild(data.hostId, Device);
-      
-    }
 }
 
 exports.Eclypse = Eclypse;
