@@ -2,6 +2,7 @@ const {BaseLocalNode, ActionNode, ValueNode} = require("dslink");
 const rpn = require('request-promise-native');
 
 class Device extends BaseLocalNode {
+    cookieJar = rpn.jar();
     initialize() {
         this.createChild('Refresh', Refresh);
         this.createChild('Remove', Remove);
@@ -17,16 +18,20 @@ class Device extends BaseLocalNode {
     shouldSaveConfig(key) {
         return true;
     }
+    setCookie() {
+        cookieJar.setCookie(this.getConfig('cookie'), getUri('/'))
+    }
+    getUri(route) {
+        return `http://${this.getConfig('ip')}` + String(route);
+    }
 }
 Device.profileName = 'device';
 
 class Refresh extends ActionNode {
     async onInvoke(params, parentNode) {
         let options = {
-        uri: `http://${this.getConfig('ip')}/api/rest/v1/info/device`,
-        headers: {
-          'Set-Cookie': this.getConfig('cookie')
-        },
+        uri: parentNode.getUri('/api/rest/v1/info/device'),
+        jar: parentNode.cookieJar,
         json: true,
         resolveWithFullResponse: true,
         timeout: 5000
@@ -38,7 +43,7 @@ class Refresh extends ActionNode {
             return device;
         })
         .catch(err => {
-            console.log(err);
+            console.log(err.message);
             return new DsError('invalidInput', {msg: err.message});
         });
     }
