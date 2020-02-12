@@ -7,4 +7,4 @@ async function main() {
   await link.connect();
 }
 
-main();
+main(); //create link with root node 'ECLYPSE'

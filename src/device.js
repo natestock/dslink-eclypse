@@ -17,14 +17,14 @@ class Device extends BaseLocalNode {
             }
         }
     }
-    shouldSaveConfig(key) {
+    shouldSaveConfig(key) { //save all config values '$'
         return true;
     }
     getUri(route) {
         return `http://${this.getConfig('ip')}` + String(route);
     }
 }
-Device.profileName = 'device';
+Device.profileName = 'device';  //set device '$is' to 'device'
 
 class Refresh extends ActionNode {
     async onInvoke(params, parentNode) {
