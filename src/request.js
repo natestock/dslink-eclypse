@@ -1,6 +1,6 @@
 const rpn = require('request-promise-native');
 
-export async function get(ip, route, https) {
+async function get(ip, route, https) {
     let endpoint = (https ? 'https://' : 'http://') + ip + route;   //endpoint
 
     let options = {
@@ -20,3 +20,5 @@ export async function get(ip, route, https) {
             return new Error(err);
         });
 }
+
+exports.get = get;
