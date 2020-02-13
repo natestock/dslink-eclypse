@@ -15,7 +15,8 @@
   "homepage": "https://github.com/natestock/dslink-eclypse",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "dslink": "^2.0.0-alpha.0",
+    "dependencies": "0.0.1",
+    "dslink": "^2.1.5",
     "ip": "^1.1.5",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.8"

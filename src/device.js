@@ -1,10 +1,8 @@
 const {BaseLocalNode, ActionNode, ValueNode} = require("dslink");
 const rpn = require('request-promise-native');
+const {get} = require('./request');
 
 class Device extends BaseLocalNode {
-    constructor(path, provider) {
-        super(path, provider);
-    }
     initialize() {
         this.createChild('Refresh', Refresh);
         this.createChild('Remove', Remove);
@@ -19,9 +17,6 @@ class Device extends BaseLocalNode {
     }
     shouldSaveConfig(key) { //save all config values '$'
         return true;
-    }
-    getUri(route) {
-        return `http://${this.getConfig('ip')}` + String(route);
     }
 }
 Device.profileName = 'device';  //set device '$is' to 'device'
