@@ -26,6 +26,7 @@ class AddDevice extends ActionNode {
     async onInvoke(params, parentNode) {  //add device at IP
       let {IP} = params;
       if (ip.isV4Format(IP)){ //is valid IP
+        console.log(IP);
         return await get(IP, '/api/rest/v1/info/device', false)
           .then(body => {
             let device = parentNode.createChild(body.hostId, Device);
