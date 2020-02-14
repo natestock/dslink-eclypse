@@ -1,0 +1,225 @@
+{
+ "$is": "node",
+ "ECY303-31595A2E-D74F-5A0E-B0DB-E3E55DB2ABF4": {
+  "$is": "device",
+  "$ip": "192.168.0.7",
+  "$user": "admin",
+  "$pass": "Maxair814",
+  "$name": "RTU-07",
+  "STATUS": {
+   "$is": "property",
+   "?value": "Connected"
+  },
+  "objects": {
+   "$is": "node"
+  },
+  "osVersion": {
+   "$is": "property",
+   "?value": "N/A"
+  },
+  "hostType": {
+   "$is": "property",
+   "?value": "eclypse"
+  },
+  "vendorName": {
+   "$is": "property",
+   "?value": "Distech Controls, Inc."
+  },
+  "cpuUsage": {
+   "$is": "property",
+   "?value": "N/A"
+  },
+  "freeMem": {
+   "$is": "property",
+   "?value": "N/A"
+  },
+  "hostId": {
+   "$is": "property",
+   "?value": "ECY303-31595A2E-D74F-5A0E-B0DB-E3E55DB2ABF4"
+  },
+  "vmVersion": {
+   "$is": "property",
+   "?value": "0"
+  },
+  "controllerName": {
+   "$is": "property",
+   "?value": "RTU-07"
+  },
+  "modelName": {
+   "$is": "property",
+   "?value": "ECY-303 Rev 1.0A"
+  },
+  "modelType": {
+   "$is": "property",
+   "?value": "10016C0005020418"
+  },
+  "hostName": {
+   "$is": "property",
+   "?value": "RTU-07"
+  },
+  "hostSoftwareVersion": {
+   "$is": "property",
+   "?value": "1.10.18178.467"
+  },
+  "softwareVersion": {
+   "$is": "property",
+   "?value": "1.10.18178.467"
+  },
+  "vmName": {
+   "$is": "property",
+   "?value": "Dalvik"
+  },
+  "osName": {
+   "$is": "property",
+   "?value": "N/A"
+  }
+ },
+ "ECYS1000-E5149368-7D4A-51F0-A4C5-D004FE2ED115": {
+  "$is": "device",
+  "$ip": "192.168.0.2",
+  "$user": "admin",
+  "$pass": "Maxair814",
+  "$name": "ECLYPSE-Server",
+  "STATUS": {
+   "$is": "property",
+   "?value": "Connected"
+  },
+  "objects": {
+   "$is": "node"
+  },
+  "osVersion": {
+   "$is": "property",
+   "?value": "N/A"
+  },
+  "hostType": {
+   "$is": "property",
+   "?value": "eclypse"
+  },
+  "vendorName": {
+   "$is": "property",
+   "?value": "Distech Controls, Inc."
+  },
+  "cpuUsage": {
+   "$is": "property",
+   "?value": "N/A"
+  },
+  "freeMem": {
+   "$is": "property",
+   "?value": "N/A"
+  },
+  "hostId": {
+   "$is": "property",
+   "?value": "ECYS1000-E5149368-7D4A-51F0-A4C5-D004FE2ED115"
+  },
+  "vmVersion": {
+   "$is": "property",
+   "?value": "0"
+  },
+  "controllerName": {
+   "$is": "property",
+   "?value": "ECLYPSE-Server"
+  },
+  "modelName": {
+   "$is": "property",
+   "?value": "ECY-S1000 Rev 1.0A"
+  },
+  "modelType": {
+   "$is": "property",
+   "?value": "10016C000502040D"
+  },
+  "hostName": {
+   "$is": "property",
+   "?value": "ECLYPSE-Server"
+  },
+  "hostSoftwareVersion": {
+   "$is": "property",
+   "?value": "1.11.18331.555"
+  },
+  "softwareVersion": {
+   "$is": "property",
+   "?value": "1.11.18331.555"
+  },
+  "vmName": {
+   "$is": "property",
+   "?value": "Dalvik"
+  },
+  "osName": {
+   "$is": "property",
+   "?value": "N/A"
+  }
+ },
+ "ECYVAV-6A405804-2141-59BD-8361-D86B5E7D22B7": {
+  "$is": "device",
+  "$ip": "192.168.0.4",
+  "$user": "admin",
+  "$pass": "Maxair814",
+  "$name": "ECY-VAV-Demo",
+  "STATUS": {
+   "$is": "property",
+   "?value": "Connected"
+  },
+  "objects": {
+   "$is": "node"
+  },
+  "osVersion": {
+   "$is": "property",
+   "?value": "N/A"
+  },
+  "hostType": {
+   "$is": "property",
+   "?value": "eclypse"
+  },
+  "vendorName": {
+   "$is": "property",
+   "?value": "Distech Controls, Inc."
+  },
+  "cpuUsage": {
+   "$is": "property",
+   "?value": "N/A"
+  },
+  "freeMem": {
+   "$is": "property",
+   "?value": "N/A"
+  },
+  "hostId": {
+   "$is": "property",
+   "?value": "ECYVAV-6A405804-2141-59BD-8361-D86B5E7D22B7"
+  },
+  "vmVersion": {
+   "$is": "property",
+   "?value": "0"
+  },
+  "controllerName": {
+   "$is": "property",
+   "?value": "ECY-VAV-Demo"
+  },
+  "modelName": {
+   "$is": "property",
+   "?value": "ECY-VAV Rev 1.0A"
+  },
+  "modelType": {
+   "$is": "property",
+   "?value": "10016C0005010315"
+  },
+  "hostName": {
+   "$is": "property",
+   "?value": "ECY-VAV-Demo"
+  },
+  "hostSoftwareVersion": {
+   "$is": "property",
+   "?value": "1.10.18178.467"
+  },
+  "softwareVersion": {
+   "$is": "property",
+   "?value": "1.10.18178.467"
+  },
+  "vmName": {
+   "$is": "property",
+   "?value": "Dalvik"
+  },
+  "osName": {
+   "$is": "property",
+   "?value": "N/A"
+  }
+ }
+}
