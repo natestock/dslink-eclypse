@@ -34,8 +34,8 @@ class Eclypse extends RootNode {
         return response;
       })
       .catch(error => {
-        console.log('rpn error: ' + error.StatusCode);
-        //return error.StatusCode;
+        console.log('rpn error: ' + error.statusCode);
+        throw new Error(error);
       });
   }
   // *************************************************************
@@ -90,12 +90,11 @@ class AddDevice extends ActionNode {
     }
     return await parentNode.get(method, ipAddr, '/api/rest/v1/info/device', auth)
       .then(body => {
-        console.log(body);
         return body.hostId;
       })
       .catch(error => {
         console.log('getdevice error: ' + error);
-        //return error.statusCode;
+        throw new Error(error.message);
       });
   }
 }
