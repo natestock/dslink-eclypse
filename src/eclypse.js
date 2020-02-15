@@ -1,64 +1,100 @@
 const {RootNode, ActionNode, DsError} = require("dslink");
-const {Device} = require("./device");
-const ip = require("ip")
-const {get} = require("./request");
-
+const {Device} = require("./device/device");
+const ip = require("ip");
+const rpn = require('request-promise-native');
+const Base64 = require("js-base64");
+// manages the adding of new devices
+// contains the root api method, stores authentication cookies
 class Eclypse extends RootNode {
+  // *************************************************************
+  async get(method, ip, route, auth) {  //root method to return api body
+    let endpoint = '';
+    switch(method) {
+      case 'https':
+        endpoint += 'https';
+        break;
+      case 'https strict':
+        endpoint += 'https';
+        break;
+      default:
+        endpoint += 'http';
+        break;
+    }
+    endpoint += '://' + ip + route;
+    const options = {
+      uri: endpoint,
+      jar: true,
+      json: true,
+      strictSSL: method === 'https strict' ? true : false,
+      auth,
+      timeout: 5000 // TODO setup as node property
+    }
+    return await rpn(options) // GET request on endpoint
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        throw new Error(error);
+      });
+  }
+  // *************************************************************
     initialize() {  //add actions to node
-      this.createChild('Add Device', AddDevice);
+      this.createChild('add device', AddDevice);
     }
     loadChild(name, data) { //add serialized devices
         if (!this.children.has(name)) {
             if (data['$is'] === Device.profileName) {
                 let node = this.createChild(name, Device);
                 node.load(data);
-                node.update();
             }
         }
     }
-  }
-  
-class AddDevice extends ActionNode {
-    initialize() {  //set action parameters
-      this.setConfig('$params', [
-        {name: 'IP', type: 'string'},
-        {name: 'User', type: 'string'},
-        {name: 'Pass', type: 'pass'}
-      ]);
-    }
-    async onInvoke(params, parentNode) {  //add device at IP
-      let {IP, User, Pass} = params;
-      if (ip.isV4Format(IP)){ //is valid IP
-        if (User) {
-          if (Pass) {
-            return await get(IP, '/api/rest/v1/info/device', true, {user:User, pass:Pass, sendImmediately: true})
-              .then(body => {
-            //found eclypse device
-                let device = parentNode.createChild(body.hostId, Device);
-                device.setConfig('$ip', IP);
-                device.setConfig('$user', User);
-                device.setConfig('$pass', Pass);
-                device.update();
-
-                return body;
-              }).catch(err => {
-                console.log(err);
-                if (err.message == 401) {
-                  return new DsError('invalidInput', {msg: 'failed to authenticate'}); //unable to find eclypse device
-                } else {
-                  return new DsError('invalidInput', {msg: 'unable to connect to Eclypse device'}); //unable to find eclypse device
-                }
-              });
-          } else {
-            return new DsError('invalidInput', {msg: 'pass cannot be empty'}); //undefined user
-          }
-        } else {
-          return new DsError('invalidInput', {msg: 'user cannot be empty'}); //undefined pass
-        }
-      } else {
-        return new DsError('invalidInput', {msg: 'invalid IP address'}); //invalid IP
-      }
-    }
+  // *************************************************************
 }
-
+class AddDevice extends ActionNode {
+  initialize() {
+    this.setConfig('$params', [
+      {name: 'method', type: 'enum[http,https,https strict]'},
+      {name: 'ip address', type: 'string'},
+      {name: 'username', type: 'string'},
+      {name: 'password', type: 'string', editor: 'password'}
+    ]);
+  }
+  async onInvoke(params, parentNode) {
+    const {'ip address': ipAddr, username, password} = params;
+    // check params
+    if (!ip.isV4Format(ipAddr)) return new DsError('invalidInput', {msg: 'must be valid ip'});
+    if (!username) return new DsError('invalidInput', {msg: 'username cannot be blank'});
+    if (!password) return new DsError('invalidInput', {msg: 'password cannot be blank'});
+    return await this.getDevice(params)
+      .then(hostId => {
+        let device = parentNode.createChild(hostId, Device, this);  // add new device
+        device.load({
+          $ip: ipAddr,
+          $auth: Base64.encode(username + ':' + password)
+        });
+        return device;
+      })
+      .catch(error => {
+        console.log(error);
+        return new DsError('invalidInput', {msg: 'failed to add device'});
+      });
+  } 
+  async getDevice(params) {
+    const {method, 'ip address': ipAddr, username, password} = params;
+    const auth = {
+      user: username,
+      pass: password,
+      sendImmediately: true
+    }
+    return await this.get(method, ipAddr, '/api/rest/v1/info/device', auth)
+      .then(body => {
+        return body.hostId;
+      })
+      .catch(error => {
+        console.log(error);
+        return error.statusCode;
+      });
+  }
+}
 exports.Eclypse = Eclypse;

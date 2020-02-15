@@ -1,5 +1,5 @@
 const {BaseLocalNode, ActionNode, ValueNode} = require("dslink");
-const {get} = require('./request');
+const {get} = require('../request');
 
 class Objects extends BaseLocalNode {
     update() {
