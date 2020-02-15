@@ -6,6 +6,7 @@ const {Base64} = require("js-base64");
 class Device extends BaseNode {
     async get(route) {
         let credentials = Base64.decode(this.getConfig('$auth')).split(':');    // decode base64 token into [user, pass]
+        console.log(credentials);
         const auth = {
             user: credentials[0],
             pass: credentials[1],
