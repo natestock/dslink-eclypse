@@ -11,6 +11,7 @@ class Device extends BaseNode {
             pass: credentials[1],
             sendImmediately: false
         };
+        console.log(auth);
         return await this.parent.get(this.getConfig('$method'), this.getConfig('$ip'), route, auth)   // GET request on endpoint
             .then(body => {
                 return body;
@@ -26,7 +27,7 @@ class Device extends BaseNode {
     }
     async refresh() {
         this.children.get('STATUS').setValue('Connecting');
-        await this.get('/api/rest/v1/info/device')
+        return await this.get('/api/rest/v1/info/device')
             .then(body => {
                 this.children.get('STATUS').setValue('Connected');
                 return body;
