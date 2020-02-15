@@ -1,6 +1,6 @@
 const {BaseLocalNode, ActionNode, ValueNode} = require("dslink");
 const {BaseNode, Remove} = require("../base-nodes");
-const Base64 = require("js-base64");
+const {Base64} = require("js-base64");
 // root class for Eclypse device
 // stores IP, authentication credentials
 class Device extends BaseNode {

@@ -2,7 +2,7 @@ const {RootNode, ActionNode, DsError} = require("dslink");
 const {Device} = require("./device/device");
 const ip = require("ip");
 const rpn = require('request-promise-native');
-const Base64 = require("js-base64");
+const {Base64} = require("js-base64");
 // manages the adding of new devices
 // contains the root api method, stores authentication cookies
 class Eclypse extends RootNode {
