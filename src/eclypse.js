@@ -75,9 +75,13 @@ class AddDevice extends ActionNode {
         });
         return device;
       })
-      .catch(error => {
-        console.log('invoke error: ' + error);
-        return new DsError('invalidInput', {msg: 'failed to add device'});
+      .catch(code => {
+        console.log(code);
+        switch(code) {  //http code error handling
+          case 401: return new DsError('invalidInput', {msg: 'invalid credentials'});
+          case 404: return new DsError('invalidInput', {msg: 'failed to find eclypse device'});
+          default: return new DsError('invalidInput', {msg: 'failed to add device'});
+        }
       });
   } 
   async getDevice(params, parentNode) {
@@ -92,7 +96,6 @@ class AddDevice extends ActionNode {
         return body.hostId;
       })
       .catch(error => {
-        console.log(error.statusCode);
         throw error.statusCode;
       });
   }
