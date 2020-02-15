@@ -6,13 +6,11 @@ const {Base64} = require("js-base64");
 class Device extends BaseNode {
     async get(route) {
         let credentials = Base64.decode(this.getConfig('$auth')).split(':');    // decode base64 token into [user, pass]
-        console.log(credentials);
         const auth = {
             user: credentials[0],
             pass: credentials[1],
             sendImmediately: false
         };
-        console.log(auth);
         return await this.parent.get(this.getConfig('$method'), this.getConfig('$ip'), route, auth)   // GET request on endpoint
             .then(body => {
                 return body;
@@ -42,7 +40,7 @@ class Device extends BaseNode {
 
 class Refresh extends ActionNode {
     onInvoke(params, parentNode) {
-        parentNode.refresh();
+        parentNode.refresh().catch(error => console.log(error));
     }
 }
 
