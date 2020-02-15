@@ -70,7 +70,7 @@ class AddDevice extends ActionNode {
     if (!password) return new DsError('invalidInput', {msg: 'password cannot be blank'});
     return await this.getDevice(params, parentNode)
       .then(hostId => {
-        let device = parentNode.createChild(hostId, Device, this);  // add new device
+        let device = parentNode.createChild(hostId, Device, parentNode);  // add new device
         device.load({
           $method: method,
           $ip: ipAddr,
