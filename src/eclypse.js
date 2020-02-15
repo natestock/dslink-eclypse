@@ -45,9 +45,9 @@ class Eclypse extends RootNode {
     loadChild(name, data) { //add serialized devices
         if (!this.children.has(name)) {
             if (data['$is'] === Device.profileName) {
-                let node = this.createChild(name, Device, this);
-                node.load(data);
-                //node.refresh();
+                let device = this.createChild(name, Device, this);
+                device.load(data);
+                device.refresh();
             }
         }
     }
@@ -75,6 +75,7 @@ class AddDevice extends ActionNode {
           $ip: ipAddr,
           $auth: Base64.encode(username + ':' + password)
         });
+        device.refresh();
         return device;
       })
       .catch(code => {

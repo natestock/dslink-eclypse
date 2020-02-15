@@ -20,7 +20,7 @@ class Device extends BaseNode {
             });
     }
     initialize() {
-        this.createChild('refresh', Remove);
+        this.createChild('refresh', Refresh);
         this.createChild('remove', Remove);
         this.createChild('STATUS', ValueNode);
     }
