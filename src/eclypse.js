@@ -66,7 +66,7 @@ class AddDevice extends ActionNode {
     if (!ip.isV4Format(ipAddr)) return new DsError('invalidInput', {msg: 'must be valid ip'});
     if (!username) return new DsError('invalidInput', {msg: 'username cannot be blank'});
     if (!password) return new DsError('invalidInput', {msg: 'password cannot be blank'});
-    return await this.getDevice(params)
+    return await this.getDevice(params, parentNode)
       .then(hostId => {
         let device = parentNode.createChild(hostId, Device, this);  // add new device
         device.load({
@@ -80,14 +80,14 @@ class AddDevice extends ActionNode {
         return new DsError('invalidInput', {msg: 'failed to add device'});
       });
   } 
-  async getDevice(params) {
+  async getDevice(params, parentNode) {
     const {method, 'ip address': ipAddr, username, password} = params;
     const auth = {
       user: username,
       pass: password,
       sendImmediately: true
     }
-    return await this.get(method, ipAddr, '/api/rest/v1/info/device', auth)
+    return await parentNode.get(method, ipAddr, '/api/rest/v1/info/device', auth)
       .then(body => {
         return body.hostId;
       })
