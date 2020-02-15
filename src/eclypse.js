@@ -47,7 +47,7 @@ class Eclypse extends RootNode {
             if (data['$is'] === Device.profileName) {
                 let node = this.createChild(name, Device, this);
                 node.load(data);
-                node.refresh();
+                //node.refresh();
             }
         }
     }

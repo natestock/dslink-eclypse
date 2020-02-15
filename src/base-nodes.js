@@ -10,7 +10,7 @@ class BaseNode extends BaseLocalNode {
     loadChild(name, data) { //add serialized devices
         if (!this.children.has(name)) {
             if (data['$is'] === 'node') {
-                let node = this.createChild(name, Device, this);
+                let node = this.createChild(name, BaseNode, this);
                 node.load(data);
             }
         }
