@@ -63,7 +63,7 @@ class AddDevice extends ActionNode {
     ]);
   }
   async onInvoke(params, parentNode) {
-    const {'ip address': ipAddr, username, password} = params;
+    const {method, 'ip address': ipAddr, username, password} = params;
     // check params
     if (!ip.isV4Format(ipAddr)) return new DsError('invalidInput', {msg: 'must be valid ip'});
     if (!username) return new DsError('invalidInput', {msg: 'username cannot be blank'});
@@ -72,6 +72,7 @@ class AddDevice extends ActionNode {
       .then(hostId => {
         let device = parentNode.createChild(hostId, Device, this);  // add new device
         device.load({
+          $method: method,
           $ip: ipAddr,
           $auth: Base64.encode(username + ':' + password)
         });

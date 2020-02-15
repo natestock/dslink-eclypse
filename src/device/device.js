@@ -28,9 +28,10 @@ class Device extends BaseNode {
         this.children.get('STATUS').setValue('Connecting');
         this.get('/api/rest/v1/info/device')
             .then(() => {
-                this.children.get('STATUS').setValue('Connecting');
+                this.children.get('STATUS').setValue('Connected');
             })
-            .catch(() => {
+            .catch(error => {
+                console.log(error);
                 this.children.get('STATUS').setValue('Failed to Connect');
             });
     }
