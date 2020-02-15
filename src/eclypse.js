@@ -34,7 +34,6 @@ class Eclypse extends RootNode {
         return response;
       })
       .catch(error => {
-        console.log('rpn error: ' + error.statusCode);
         throw new Error(error);
       });
   }
@@ -93,8 +92,8 @@ class AddDevice extends ActionNode {
         return body.hostId;
       })
       .catch(error => {
-        console.log('getdevice error: ' + error);
-        throw new Error(error.message);
+        console.log(error.statusCode);
+        throw new Error(error.statusCode);
       });
   }
 }
