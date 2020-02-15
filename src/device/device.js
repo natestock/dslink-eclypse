@@ -11,7 +11,7 @@ class Device extends BaseNode {
             pass: credentials[1],
             sendImmediately: false
         };
-        return await this.parent.get(this.getConfig('method'), this.getConfig('ip'), route, auth)   // GET request on endpoint
+        return await this.parent.get(this.getConfig('$method'), this.getConfig('$ip'), route, auth)   // GET request on endpoint
             .then(body => {
                 return body;
             })
