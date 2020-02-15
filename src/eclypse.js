@@ -34,7 +34,8 @@ class Eclypse extends RootNode {
         return response;
       })
       .catch(error => {
-        throw new Error(error);
+        console.log('rpn error: ' + error);
+        return error;
       });
   }
   // *************************************************************
@@ -76,7 +77,7 @@ class AddDevice extends ActionNode {
         return device;
       })
       .catch(error => {
-        console.log(error);
+        console.log('invoke error: ' + error);
         return new DsError('invalidInput', {msg: 'failed to add device'});
       });
   } 
@@ -92,7 +93,7 @@ class AddDevice extends ActionNode {
         return body.hostId;
       })
       .catch(error => {
-        console.log(error);
+        console.log('getdevice error: ' + error);
         return error.statusCode;
       });
   }
