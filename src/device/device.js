@@ -24,15 +24,16 @@ class Device extends BaseNode {
         this.createChild('remove', Remove);
         this.createChild('STATUS', ValueNode);
     }
-    refresh() {
+    async refresh() {
         this.children.get('STATUS').setValue('Connecting');
-        this.get('/api/rest/v1/info/device')
-            .then(() => {
+        await this.get('/api/rest/v1/info/device')
+            .then(body => {
                 this.children.get('STATUS').setValue('Connected');
+                return body;
             })
             .catch(error => {
-                console.log(error);
                 this.children.get('STATUS').setValue('Failed to Connect');
+                throw error;
             });
     }
 }
