@@ -1,4 +1,4 @@
-const {BaseLocalNode, ActionNode, ValueNode} = require("dslink");
+const {ActionNode, ValueNode} = require("dslink");
 const {BaseNode, Remove} = require("../base-nodes");
 const {Base64} = require("js-base64");
 // root class for Eclypse device
@@ -16,13 +16,32 @@ class Device extends BaseNode {
                 return body;
             })
             .catch(error => {
-                throw new Error(error);
+                throw error;
             });
     }
     initialize() {
+        this.createChild('refresh', Remove);
         this.createChild('remove', Remove);
-        this.createChild('status', ValueNode);
+        this.createChild('STATUS', ValueNode);
+    }
+    refresh() {
+        this.children.get('STATUS').setValue('Connecting');
+        this.get('/api/rest/v1/info/device')
+            .then(() => {
+                this.children.get('STATUS').setValue('Connecting');
+            })
+            .catch(() => {
+                this.children.get('STATUS').setValue('Failed to Connect');
+            });
     }
 }
+
+class Refresh extends ActionNode {
+    onInvoke(params, parentNode) {
+        parentNode.refresh();
+    }
+}
+
+Device.profileName = 'device';
 
 exports.Device = Device;

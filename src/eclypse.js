@@ -34,6 +34,7 @@ class Eclypse extends RootNode {
         return response;
       })
       .catch(error => {
+        console.log(error);
         throw error;
       });
   }
@@ -44,8 +45,9 @@ class Eclypse extends RootNode {
     loadChild(name, data) { //add serialized devices
         if (!this.children.has(name)) {
             if (data['$is'] === Device.profileName) {
-                let node = this.createChild(name, Device);
+                let node = this.createChild(name, Device, this);
                 node.load(data);
+                node.refresh();
             }
         }
     }
@@ -91,7 +93,7 @@ class AddDevice extends ActionNode {
       pass: password,
       sendImmediately: true
     }
-    return await parentNode.get(method, ipAddr, '/api/rest/v1/info/device', auth)
+    return await parentNode.get(method, ipAddr, '/api/rest/v1/info/device', auth) // GET device properties endpoint
       .then(body => {
         return body.hostId;
       })
